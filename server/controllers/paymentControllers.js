@@ -19,7 +19,7 @@ export const buySubscription = catchAsyncError(async (req, res, next) => {
   }
   // create payment
   const createSubs = await instance.subscriptions.create({
-    plan_id: "plan_O8LQ0c4yY63vsW",
+    plan_id: process.env.RAZORPAY_PLAN_ID,
     total_count: 12,
     customer_notify: 1,
   });

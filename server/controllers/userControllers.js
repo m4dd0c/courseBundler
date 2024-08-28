@@ -201,7 +201,7 @@ export const forgetPasswordController = catchAsyncError(
     const subject = "Forget password - CourseBundler";
 
     const resetToken = crypto.randomBytes(10).toString("hex");
-    const url = "http://localhost:5173" + "/resetpassword/" + resetToken;
+    const url = process.env.FRONTEND_URL + "/resetpassword/" + resetToken;
     const body = url;
     const mailSendSuccessfully = await mailSender(email, subject, body);
 

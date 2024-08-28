@@ -1,6 +1,6 @@
 import express from "express";
 import { config } from "dotenv";
-config({ path: "./config/config.env" });
+config({ path: "./config/.env" });
 import userRouter from "./routes/userRoutes.js";
 import courseRouter from "./routes/courseRoutes.js";
 import paymentRouter from "./routes/paymentRoutes.js";
@@ -16,15 +16,15 @@ app.use(express.json());
 app.use(
   express.urlencoded({
     extended: true,
-  })
+  }),
 );
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_URL,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
-  })
+  }),
 );
 
 app.use(cookieParser());
@@ -34,5 +34,5 @@ app.use("/api/v1", courseRouter);
 app.use("/api/v1", paymentRouter);
 app.use("/api/v1", otherRouter);
 
-export default app;
 app.use(errorMiddleware);
+export default app;
