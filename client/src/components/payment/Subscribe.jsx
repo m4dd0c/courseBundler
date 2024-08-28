@@ -8,9 +8,7 @@ const Subscribe = ({ user }) => {
   const dispatch = useDispatch();
   const [key, setKey] = useState("");
 
-  const { subscriptionId } = useSelector(
-    (state) => state.subscriptionReducer
-  );
+  const { subscriptionId } = useSelector((state) => state.subscriptionReducer);
 
   const subscribeHandler = async () => {
     const { data } = await axios.get(`${server}/getrazorpaykey`);
@@ -46,7 +44,6 @@ const Subscribe = ({ user }) => {
         // console.log(options);
       };
       openPopUp();
-      console.log("the openPopUp is woring fine...");
     }
   }, [dispatch, user.name, user.email, key, subscriptionId]);
   return (

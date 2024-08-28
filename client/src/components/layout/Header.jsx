@@ -7,7 +7,6 @@ import logo from "/images/logo.png";
 const Header = ({ isAuthenticated, isAdmin }) => {
   const [hamburgerTrue, setHamburgerTrue] = useState(false);
   const dispatch = useDispatch();
-  console.log(isAdmin);
   const nav = useNavigate();
   const logoutHandler = () => {
     dispatch(logOut());

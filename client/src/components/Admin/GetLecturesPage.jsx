@@ -23,7 +23,6 @@ const GetLecturesPage = () => {
   const nav = useNavigate();
   const viewLecture = () => {
     nav(`/course/${id}`);
-    console.log("play Lecture");
   };
 
   const { loading } = useSelector((state) => state.globalReducer);

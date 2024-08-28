@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  resetPasswordAction,
-} from "../../redux/actions/profileActions.js";
+import { resetPasswordAction } from "../../redux/actions/profileActions.js";
 import { useParams } from "react-router-dom";
 
 const ResetPassword = () => {
@@ -21,17 +19,9 @@ const ResetPassword = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      resetPasswordAction(token, input.newPassword, input.confirmPassword)
+      resetPasswordAction(token, input.newPassword, input.confirmPassword),
     );
-    console.log(
-      token,
-      input.newPassword,
-      input.confirmPassword,
-      "here is data"
-    );
-    console.log("ho to gye");
   };
-
 
   return (
     <>

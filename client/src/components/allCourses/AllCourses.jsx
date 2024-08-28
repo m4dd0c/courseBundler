@@ -11,7 +11,6 @@ const AllCourses = () => {
   const [keyword, setKeyword] = useState("");
   const dispatch = useDispatch();
   const { courses } = useSelector((state) => state.courseReducer);
-  console.log(courses);
   const categories = [
     "Web Development",
     "Artificial Intelligence",

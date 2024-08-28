@@ -57,11 +57,10 @@ export const removeFromPlaylistAction = (courseId) => async (dispatch) => {
   try {
     dispatch(req());
     const { data } = await instance.delete(
-      `/removefromplaylist?courseId=${courseId}`
+      `/removefromplaylist?courseId=${courseId}`,
     );
     dispatch(res(data));
   } catch (error) {
-    console.log(error);
     dispatch(rej(error?.response?.data?.message));
   }
 };

@@ -1,0 +1,9 @@
+{
+  "name": "course-bundler",
+  "version": "0.0.0",
+  "scripts": {
+    "dev-fe": "cd client; npm run dev",
+    "dev-be": "cd server; npm run dev",
+    "dev": "concurrently \"npm run dev-fe\" \"npm run dev-be\""
+  }
+}

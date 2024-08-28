@@ -102,7 +102,6 @@ export const changePasswordController = catchAsyncError(
     if (!userId) return next(new ErrorHandler("Unauthorized user", 401));
 
     const User1 = await User.findById(userId).select("+password");
-    // console.log(User1)
     if (!User1) return next(new ErrorHandler("User not found", 401));
 
     // console.log("---------here========")
@@ -120,7 +119,7 @@ export const changePasswordController = catchAsyncError(
       message: "Password changed successfully",
       User1,
     });
-  }
+  },
 );
 
 export const updateProfileController = catchAsyncError(
@@ -153,7 +152,7 @@ export const updateProfileController = catchAsyncError(
       message: "Profile Updated Successfully",
       User1,
     });
-  }
+  },
 );
 
 export const updateProfilePictureController = catchAsyncError(
@@ -181,7 +180,7 @@ export const updateProfilePictureController = catchAsyncError(
       success: true,
       message: "Profile Picture Updated Successfully",
     });
-  }
+  },
 );
 
 export const forgetPasswordController = catchAsyncError(
@@ -195,8 +194,8 @@ export const forgetPasswordController = catchAsyncError(
       return next(
         new ErrorHandler(
           "User with this mail doesn't exist in the database",
-          401
-        )
+          401,
+        ),
       );
 
     const subject = "Forget password - CourseBundler";
@@ -216,7 +215,7 @@ export const forgetPasswordController = catchAsyncError(
       success: true,
       message: `Mail sent successfully on ${email}`,
     });
-  }
+  },
 );
 
 export const resetPasswordController = catchAsyncError(
@@ -229,14 +228,11 @@ export const resetPasswordController = catchAsyncError(
     if (!newPassword || !confirmPassword)
       return next(new ErrorHandler("Fill all field", 401));
     // 8:
-    // console.log("here we go " , req)
     const { token } = req.params;
-    // console.log("token in backend" ,token);
     const changableUser = await User.findOne({
       ResetPasswordToken: token,
       ResetPasswordExpire: { $gt: Date.now() },
     }).select("+password");
-    // console.log(changableUser);
     if (!changableUser)
       return next(new ErrorHandler("Token expired or not found", 401));
 
@@ -250,7 +246,7 @@ export const resetPasswordController = catchAsyncError(
       success: true,
       message: "Password has updated",
     });
-  }
+  },
 );
 
 export const addToPlaylistController = catchAsyncError(
@@ -275,7 +271,7 @@ export const addToPlaylistController = catchAsyncError(
 
     if (itemExist)
       return next(
-        new ErrorHandler("Course already present in your playlist", 409)
+        new ErrorHandler("Course already present in your playlist", 409),
       );
 
     theUser.playlist.push({
@@ -290,23 +286,20 @@ export const addToPlaylistController = catchAsyncError(
       success: true,
       message: "Added to playlist",
     });
-  }
+  },
 );
 
 export const removeFromPlaylistController = catchAsyncError(
   async (req, res, next) => {
     const userId = req.id;
     const { courseId } = req.query;
-    console.log("courseId,", courseId);
     if (!userId || !courseId)
       return next(new ErrorHandler("Unauthorized access denied", 401));
 
     const theUser = await User.findById(userId);
-    console.log("got user", !!theUser);
     if (!theUser) return next(new ErrorHandler("User not available", 500));
 
     const theCourse = await Course.findById(courseId); // yeh print nhi ho hia
-    console.log("thecourse", theCourse);
     if (!theCourse) return next(new ErrorHandler("course not available", 500));
 
     const newPlaylist = theUser.playlist.filter((item) => {
@@ -319,7 +312,7 @@ export const removeFromPlaylistController = catchAsyncError(
       success: true,
       message: "Remvoed from playlist",
     });
-  }
+  },
 );
 
 //admin controllers
@@ -334,7 +327,6 @@ export const getAllUsersController = catchAsyncError(async (req, res, next) => {
 
 export const updateRoleController = catchAsyncError(async (req, res, next) => {
   const { id } = req.params;
-  // console.log("id from controller")
   const user = await User.findById(id);
   if (!user) return next(new ErrorHandler("User not found", 404));
 
@@ -365,7 +357,7 @@ export const deleteAnyUserController = catchAsyncError(
       success: true,
       message: "User deleted successfully",
     });
-  }
+  },
 );
 
 export const deleteProfileController = catchAsyncError(
@@ -387,5 +379,5 @@ export const deleteProfileController = catchAsyncError(
         success: true,
         message: "Your profile get deleted successfully",
       });
-  }
+  },
 );

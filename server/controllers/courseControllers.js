@@ -117,17 +117,15 @@ export const getCourseLectures = catchAsyncError(async (req, res, next) => {
 //create one lecture in a course using req.params
 export const addLecture = catchAsyncError(async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
   const { title, description } = req.body;
   if (!title || !description)
     return next(new ErrorHandler("Title or description not found", 404));
 
   const theCourse = await Course.findById(id);
-  console.log("course", !!theCourse);
   if (!theCourse) return next(new ErrorHandler("Course not found", 404));
 
   const lectureExists = theCourse.lectures.some(
-    (lecture) => lecture.title === title
+    (lecture) => lecture.title === title,
   );
   if (lectureExists)
     return next(new ErrorHandler("Lecture already exists", 400));
@@ -139,7 +137,6 @@ export const addLecture = catchAsyncError(async (req, res, next) => {
   const myCloud = await cloudinary.v2.uploader.upload(fileUri.content, {
     resource_type: "video",
   });
-  console.log("pre push");
   theCourse.lectures.push({
     title,
     description,
@@ -148,10 +145,8 @@ export const addLecture = catchAsyncError(async (req, res, next) => {
       url: myCloud.secure_url,
     },
   });
-  console.log("late push");
   theCourse.numOfVideos = theCourse.lectures.length;
   await theCourse.save();
-  console.log("finished");
   return res.status(200).json({
     success: true,
     message: "Lecture added successfully to the course",

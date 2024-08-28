@@ -14,7 +14,6 @@ export const getAllCoursesAction =
       dispatch(allCoursesSuccess(data));
       dispatch(res(data));
     } catch (error) {
-      console.log(error);
       dispatch(rej(error?.response?.data?.message));
     }
   };

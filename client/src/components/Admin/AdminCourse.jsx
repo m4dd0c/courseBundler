@@ -17,11 +17,10 @@ const AdminCourse = () => {
   const viewLectures = (id) => {
     console.log(id);
   };
+
   const deleteLecture = async (id) => {
-    console.log(id);
     await dispatch(deleteOneCourseAction(id));
     dispatch(getAllCoursesAction());
-    console.log("deleted");
   };
   const { loading } = useSelector((state) => state.globalReducer);
   return loading ? (

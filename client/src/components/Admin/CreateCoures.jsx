@@ -29,7 +29,6 @@ const CreateCoures = () => {
 
   const inputHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
-    console.log(input);
   };
 
   const imageClickInputHandler = () => {
@@ -64,7 +63,6 @@ const CreateCoures = () => {
     <Loader />
   ) : (
     <>
-      
       <div className="bg-[#1D232A] h-full pb-20">
         <h1 className="text-center text-5xl text-white py-14 font-bold">
           Create New Course
@@ -168,7 +166,6 @@ const CreateCoures = () => {
           </form>
         </div>
       </div>
-      
     </>
   );
 };
